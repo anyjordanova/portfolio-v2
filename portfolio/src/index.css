@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html, body {
   scroll-behavior: auto;
+}
+
+.font-display {
+  font-family: 'Syncopate', sans-serif;
 }

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { ProjectLayout } from './components/ProjectLayout'
+import { ThreeShape } from './components/ThreeShape'
 
 // Pages
 const Home = () => (
@@ -57,17 +58,77 @@ const Projects = () => (
   </div>
 )
 
-const About = () => (
-  <div className="min-h-screen p-10">
-    <motion.h1
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="text-5xl font-bold mb-10"
-    >
-      About
-    </motion.h1>
-  </div>
-)
+const About = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePosition({
+      x: (e.clientX - window.innerWidth / 2) / window.innerWidth,
+      y: (e.clientY - window.innerHeight / 2) / window.innerHeight
+    })
+  }
+
+  return (
+    <div onMouseMove={handleMouseMove} className="relative">
+      <div className="min-h-[110vh] bg-neutral-900 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <ThreeShape mouseX={mousePosition.x} mouseY={mousePosition.y} />
+        </div>
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20">
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-7xl md:text-8xl font-bold text-center mb-8 font-display tracking-wider"
+          >
+            Hi, I'm Anežka
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl md:text-2xl text-center max-w-2xl text-gray-400"
+          >
+            I'm a 19 year old student of IT and I'm interested in web & mobile app development and design.
+          </motion.p>
+        </div>
+      </div>
+      
+      <div className="min-h-screen w-full bg-black relative overflow-hidden flex items-center flex-col">
+        {/* Photo of me  */}
+        <div className="xl:w-1/2 xl:h-1/2 lg:w-1/2 lg:h-1/2 md:w-1/2 md:h-1/2 sm:w-1/2 sm:h-1/2 w-full h-full mx-10 my-0 pt-20">
+          <motion.img
+            src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            alt="Kreativní workspace"
+            initial={{ scale: 1.2 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+        </div>
+
+        {/* About me  */}
+        <div className=" mx-10 my-0 pt-20 gap-5 flex flex-col">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-7xl text-center max-w-2xl text-white font-display tracking-wider"
+          >
+            Who am I?
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl max-w-2xl text-gray-300"
+          >
+            I'm a girl who loves to code and design. Currently, my biggest passion is cross-platform mobile app development. But I also love to code websites and video games.
+          </motion.p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const Contact = () => (
   <div className="min-h-screen p-10">
