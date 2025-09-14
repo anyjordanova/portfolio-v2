@@ -18,7 +18,7 @@ const videos: Video[] = [
   {
     id: '2',
     title: "La Valse d'Amélie (Yann Tiersen)",
-    src: '/videos/la-valse-d-amelie.mov',
+    src: '/videos/la-valse-d-amelie.mp4',
     thumbnail: '/images/la-valse-d-amelie-thumbnail.png'
   }
 ]
