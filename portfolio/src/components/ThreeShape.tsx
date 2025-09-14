@@ -22,7 +22,7 @@ function Shape({ mouseX, mouseY }: ShapeProps) {
   useFrame(() => {
     if (meshRef.current) {
       // Základní rotace
-      meshRef.current.rotation.x += 0.002
+      meshRef.current.rotation.x += 0.0005
       meshRef.current.rotation.y += 0.001
 
       // Aktualizace cílové pozice
@@ -47,10 +47,10 @@ function Shape({ mouseX, mouseY }: ShapeProps) {
   return (
     <TorusKnot ref={meshRef} args={[2, 0.5, 128, 32]}>
       <MeshDistortMaterial
-        color="#98cdd9"
+        color="#6c868c"
         wireframe
-        speed={5}
-        distort={0.3}
+        speed={1}
+        distort={0.8}
       />
     </TorusKnot>
   )
@@ -59,8 +59,8 @@ function Shape({ mouseX, mouseY }: ShapeProps) {
 export function ThreeShape({ mouseX, mouseY }: ShapeProps) {
   return (
     <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={0.4} />
+      <pointLight position={[0, 0, -5]} intensity={5} color={"#6c868c"} />
       <Shape mouseX={mouseX} mouseY={mouseY} />
     </Canvas>
   )

@@ -33,7 +33,7 @@ export const ProjectLayout = ({ title, description, metadata, images }: ProjectL
 
       {/* Popis */}
       <motion.p 
-        className="text-xl text-gray-400 max-w-2xl mb-16"
+        className="text-xl text-gray-400 max-w-5xl mb-16"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -49,22 +49,22 @@ export const ProjectLayout = ({ title, description, metadata, images }: ProjectL
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div>
-          <h3 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Typ projektu</h3>
+          <h3 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Type</h3>
           <p className="text-lg font-medium">{metadata.type}</p>
         </div>
         <div>
-          <h3 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Datum</h3>
+          <h3 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Date</h3>
           <p className="text-lg font-medium">{metadata.date}</p>
         </div>
         <div>
-          <h3 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Technologie</h3>
+          <h3 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Tech Stack</h3>
           <p className="text-lg font-medium">{metadata.technologies.join(', ')}</p>
         </div>
       </motion.div>
 
       {/* Layout fotek */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-start"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -72,15 +72,18 @@ export const ProjectLayout = ({ title, description, metadata, images }: ProjectL
         {images.map((image, index) => (
           <motion.div
             key={index}
-            className="aspect-video rounded-xl overflow-hidden bg-gray-900"
+            className="w-full flex items-start justify-start"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
-            <img 
-              src={image.src} 
-              alt={image.alt}
-              className="w-full h-full object-cover"
-            />
+            <div className="relative bg-neutral-900/50 rounded-xl overflow-hidden backdrop-blur-sm">
+              <img 
+                src={image.src} 
+                alt={image.alt}
+                className="w-auto max-w-full h-auto object-contain"
+                style={{ maxHeight: '500px' }}
+              />
+            </div>
           </motion.div>
         ))}
       </motion.div>

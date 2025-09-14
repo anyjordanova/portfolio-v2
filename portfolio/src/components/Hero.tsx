@@ -1,59 +1,84 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { GridShape } from './GridShape'
 
 export const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width * 2 - 1
-    const y = (e.clientY - rect.top) / rect.height * 2 - 1
-    setMousePosition({ x, y })
-  }
+  // const handleMouseMove = (e: React.MouseEvent) => {
+  //   const rect = e.currentTarget.getBoundingClientRect()
+  //   const x = (e.clientX - rect.left) / rect.width * 2 - 1
+  //   const y = (e.clientY - rect.top) / rect.height * 2 - 1
+  //   setMousePosition({ x, y })
+  // }
 
-  // Reset pozice při opuštění sekce
-  const handleMouseLeave = () => {
-    setMousePosition({ x: 0, y: 0 })
-  }
+  // // Reset pozice při opuštění sekce
+  // const handleMouseLeave = () => {
+  //   setMousePosition({ x: 0, y: 0 })
+  // }
 
   return (
-    <section 
-      className="h-screen flex flex-col md:flex-row bg-black text-white relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <section
+      className="min-h-screen flex flex-col md:flex-row bg-black text-white relative overflow-hidden"
+ 
     >
       {/* Text - na mobilu nahoře */}
-      <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center px-6 md:px-10 order-1 md:order-none relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="max-w-xl"
-        >
-          <motion.h1 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6">
-            Anežka Jordánová
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+      <div className='flex flex-col 2xl:flex-row xl:flex-row lg:flex-rom md:flex-row w-full justify-around items-center' >
+        <div className="w-full md:w-1/2 2xl:min-h-[50vh] xl::min-h-[50vh] lg::min-h-[50vh] min-h-[40vh] flex items-center justify-center p-6 md:p-10 lg:p-16 order-1 md:order-none relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-400"
+            transition={{ duration: 1 }}
+            className="w-full max-w-xl"
           >
-            I create digital experiences that are unique and memorable.
-          </motion.p>
-        </motion.div>
+            <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 font-display">
+              Anezka
+            </motion.h1>
+            <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium mb-4 md:mb-6 font-display">
+              Jordanova 
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="text-md sm:text-xl lg:text-xl text-gray-400"
+            >
+              I create digital experiences that are unique and memorable
+            </motion.p>
+          </motion.div>
+        </div>
+
+        {/* Navigation cards */}
+
+        <div className='order-2 w-full 2xl:max-w-[30vw] xl:max-w-[30vw] lg:max-w-[30vw] md:max-w-[30vw] '>
+            <div className="w-full px-10 md:p-10 lg:p-16 order-1 md:order-none relative z-10 justify-center items-center flex">
+              <div className="flex flex-col gap-5 w-full max-w-xl">
+                {['About', 'Projects', 'Contact'].map((item, index) => (
+                  <a href={`${item.toLowerCase().replace(' ', '-')}`} key={index} className="w-full">
+                    <motion.div
+                    key={index}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-gray-800 bg-opacity-50 backdrop-blur-md rounded-lg p-6 cursor-pointer border border-gray-700 hover:border-white transition flex flex-row justify-between items-center gap-5"
+                  >
+                    <h2 className="text-2xl font-normal">{item}</h2>
+
+                    {/* Small link icon */}
+                    <svg width="16px" height="16px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 2v7.5h-1v-5.668l-9.334 9.334-0.707-0.707 9.459-9.459h-5.918v-1h7.5zM11 16h-10v-10h6.574v-1h-7.574v12h12v-7.714h-1v6.714z" fill="#ffffff"></path> </g></svg>
+
+
+                  </motion.div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
       </div>
-      
+
       {/* Mřížka na pozadí */}
-      <div className="absolute inset-0">
-        <GridShape  />
+      <div className="absolute inset-0 w-full md:w-1/2">
+
       </div>
-      
-      {/* Kontejner pro obrázek - na mobilu dole */}
-      <div className="w-full md:w-1/2 h-1/2 md:h-full bg-transparent flex items-center justify-center order-2 md:order-none relative z-10">
-        <div className="w-4/5 h-4/5 bg-gray-800/30 rounded-lg backdrop-blur-sm"></div>
-      </div>
+      <GridShape />
     </section>
   )
 }

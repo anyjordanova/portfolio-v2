@@ -1,72 +1,72 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ProjectCard } from './ProjectCard'
+import { useEffect } from 'react'
 
 interface NavbarProps {
-  onClose: () => void
+  onClose: () => void,
 }
 
 export const Navbar = ({ onClose }: NavbarProps) => {
+
   const menuItems = [
-    { 
-      path: '/', 
-      label: 'Home',
-      preview: '/images/home-preview.jpg'
-    },
-    { 
-      path: '/projects', 
-      label: 'Projects',
-      preview: '/images/projects-preview.jpg'
-    },
-    { 
-      path: '/about', 
-      label: 'About',
-      preview: '/images/about-preview.jpg'
-    },
-    { 
-      path: '/contact', 
-      label: 'Contact',
-      preview: '/images/contact-preview.jpg'
-    },
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/contact', label: 'Contact' },
   ]
 
+
+  // Přidání event listeneru pro kliknutí mimo navbar
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.className == 'navbar-content') {
+        console.log("closed")
+        onClose()    
+        
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [onClose])
+
   return (
-    <div className="h-full overflow-x-auto overflow-y-hidden">
-      <div className="flex space-x-16 p-8 min-w-max">
-        {menuItems.map((item) => (
-          <motion.div
-            key={item.path}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="flex flex-col items-start space-y-4"
-          >
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 bg-black/50 z-40"
+        onClick={onClose}
+      />
+      <motion.div
+        initial={{ y: '-100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '-100%' }}
+        transition={{ type: 'tween', duration: 0.3 }}
+        className=" fixed top-0 left-0 right-0 z-50"
+      >
+        <div className="flex justify-center items-center py-12 2xl:space-x-16 xl:space-x-16 lg:space-x-16 md:space-x-16 sm:space-x-16 space-x-5">
+          {menuItems.map((item) => (
             <Link
+              key={item.path}
               to={item.path}
-              onClick={onClose}
+              onClick={() => {
+                onClose()
+              }}
               className="group"
             >
-              <motion.h2 
-                className="text-4xl font-bold text-black hover:text-gray-600 transition-colors"
-                whileHover={{ x: 10 }}
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="navbar-content text-LG xxl:text-2xl xl:text-2xl lg:text-2xl md:text-2xl sm:text-2xl font-medium text-white/90 hover:text-white transition-all"
               >
                 {item.label}
-              </motion.h2>
-              <motion.p 
-                className="text-gray-500 mt-2 group-hover:text-black transition-colors max-w-xs"
-                whileHover={{ x: 10 }}
-              >
-              </motion.p>
+              </motion.div>
             </Link>
-            
-            <ProjectCard
-              path={item.path}
-              // image={item.preview}
-              onClick={onClose}
-            />
-          </motion.div>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </motion.div>
+      </>
   )
 }

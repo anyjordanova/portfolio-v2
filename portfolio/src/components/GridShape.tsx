@@ -1,17 +1,17 @@
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { MeshDistortMaterial } from '@react-three/drei'
+import { MeshWobbleMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Grid() {
   const meshRef = useRef<THREE.Mesh>(null)
   
-  // Vytvoření geometrie mřížky
-  const geometry = new THREE.PlaneGeometry(20, 20, 20, 20)
-  const material = new THREE.MeshBasicMaterial({
-    wireframe: true,
-    color: '#98cdd9'
-  })
+  // Vytvoření geometrie mřížky - zvětšená velikost
+  const geometry = new THREE.PlaneGeometry(100, 100, 30, 40)
+  // const material = new THREE.MeshBasicMaterial({
+  //   wireframe: true,
+  //   color: '#98cdd9'
+  // })
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -24,7 +24,7 @@ function Grid() {
         const y = positions[i + 1]
         
         // Vytvoření vlnité deformace
-        positions[i + 2] = Math.sin(x * 0.5 + time) * Math.cos(y * 0.5 + time) * 2
+        positions[i + 2] = Math.sin(x * 0.3 + time) * Math.cos(y * 0.3 + time) * 2
       }
       
       geometry.attributes.position.needsUpdate = true
@@ -39,14 +39,13 @@ function Grid() {
       <mesh
         ref={meshRef}
         geometry={geometry}
-        rotation={[0, 0, 0]} // Mřížka stojí vertikálně
+        rotation={[0, 0, 0]}
         position={[0, 0, 0]}
       >
-        <MeshDistortMaterial
+        <MeshWobbleMaterial
           wireframe
-          color="#98cdd9"
-          speed={2}
-          distort={0.3}
+          color="#52595e"
+          speed={1}
         />
       </mesh>
     </>
@@ -57,7 +56,7 @@ export function GridShape() {
   return (
     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'black' }}>
       <Canvas
-        camera={{ position: [0, 0, 30], fov: 50 }}
+        camera={{ position: [0, 0, 70], fov: 30 }}
       >
         <Grid />
       </Canvas>
