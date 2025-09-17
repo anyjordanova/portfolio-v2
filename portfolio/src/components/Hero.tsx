@@ -19,7 +19,7 @@ export const Hero = () => {
   return (
     <section
       className="min-h-screen flex flex-col md:flex-row bg-black text-white relative overflow-hidden"
- 
+
     >
       {/* Text - na mobilu nahoře */}
       <div className='flex flex-col 2xl:flex-row xl:flex-row lg:flex-rom md:flex-row w-full justify-around items-center' >
@@ -34,7 +34,7 @@ export const Hero = () => {
               Anezka
             </motion.h1>
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium mb-4 md:mb-6 font-display">
-              Jordanova 
+              Jordanova
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -50,28 +50,36 @@ export const Hero = () => {
         {/* Navigation cards */}
 
         <div className='order-2 w-full 2xl:max-w-[30vw] xl:max-w-[30vw] lg:max-w-[30vw] md:max-w-[30vw] '>
-            <div className="w-full px-10 md:p-10 lg:p-16 order-1 md:order-none relative z-10 justify-center items-center flex">
-              <div className="flex flex-col gap-5 w-full max-w-xl">
-                {['About', 'Projects', 'Contact'].map((item, index) => (
-                  <a href={`${item.toLowerCase().replace(' ', '-')}`} key={index} className="w-full">
-                    <motion.div
+          <div className="w-full px-10 md:p-10 lg:p-16 order-1 md:order-none relative z-10 justify-center items-center flex">
+            <div className="flex flex-col gap-5 w-full max-w-xl">
+              {['About', 'Projects', 'Contact'].map((item, index) => (
+                <a href={`${item.toLowerCase().replace(' ', '-')}`} key={index} className="w-full">
+                  <motion.div
                     key={index}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-gray-800 bg-opacity-50 backdrop-blur-md rounded-lg p-6 cursor-pointer border border-gray-700 hover:border-white transition flex flex-row justify-between items-center gap-5"
+                    className="p-6 cursor-pointer flex flex-row justify-between items-center gap-5
+             bg-gradient-to-br from-gray-200/20 via-gray-500/10 to-gray-200/20
+             backdrop-blur-sm border border-none rounded-2xl backdrop-opacity-50
+             shadow-lg shadow-black/20 hover:shadow-[0_8px_20px_rgba(0,0,0,0.4),inset_0_2px_5px_rgba(255,255,255,0.25)]
+             transition-all duration-300"
                   >
-                    <h2 className="text-2xl font-normal">{item}</h2>
+                    <h2 className="text-2xl font-display text-gray-300">{item}</h2>
 
                     {/* Small link icon */}
-                    <svg width="16px" height="16px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 2v7.5h-1v-5.668l-9.334 9.334-0.707-0.707 9.459-9.459h-5.918v-1h7.5zM11 16h-10v-10h6.574v-1h-7.574v12h12v-7.714h-1v6.714z" fill="#ffffff"></path> </g></svg>
-
-
+                    <svg width="16px" height="16px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#6e6a7d">
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path d="M15 2v7.5h-1v-5.668l-9.334 9.334-0.707-0.707 9.459-9.459h-5.918v-1h7.5zM11 16h-10v-10h6.574v-1h-7.574v12h12v-7.714h-1v6.714z" fill="#908ca1"></path>
+                      </g>
+                    </svg>
                   </motion.div>
-                  </a>
-                ))}
-              </div>
+                </a>
+              ))}
             </div>
           </div>
+        </div>
       </div>
 
       {/* Mřížka na pozadí */}
